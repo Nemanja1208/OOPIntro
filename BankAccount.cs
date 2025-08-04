@@ -3,16 +3,22 @@
     public class BankAccount
     {
         public string AccountHolder { get; set; }
-        public decimal Balance { get; set; }
+        private decimal Balance;
 
         public void Deposit(decimal amount)
         {
-            Balance += amount;
+            if (amount > 0)
+            {
+                Balance += amount;
+            }
         }
 
         public void Withdraw(decimal amount)
         {
-            Balance -= amount;
+            if (amount > 0 && amount <= Balance)
+            {
+                Balance -= amount;
+            }
         }
 
         public void PrintBalance()
