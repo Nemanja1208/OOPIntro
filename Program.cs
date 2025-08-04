@@ -4,11 +4,13 @@
     {
         static void Main(string[] args)
         {
-            BankAccount myAccount = new BankAccount();
-            myAccount.AccountHolder = "Anna Andersson";
-            myAccount.Deposit(1000);
-            myAccount.Withdraw(250);
-            myAccount.PrintBalance(); // Output: Account Holder: Anna Andersson, Balance: 750 kr
+            // ABSTRAKTION exempel
+            Account myAccount = new BankAccount(); // abstrakt typ, konkret implementation
+            myAccount.AccountHolder = "Sara Svensson";
+
+            myAccount.Deposit(2000);
+            myAccount.Withdraw(500);
+            myAccount.PrintSummary(); // Output: [Privatkonto] Sara Svensson - Saldo: 1500 kr
         }
     }
 }

@@ -1,23 +1,43 @@
 ﻿namespace OOPIntro
 {
-    public class BankAccount
+    public abstract class Account
     {
         public string AccountHolder { get; set; }
-        public decimal Balance { get; set; }
 
-        public void Deposit(decimal amount)
+        public abstract void Deposit(decimal amount);
+        public abstract void Withdraw(decimal amount);
+        public abstract decimal GetBalance();
+
+        public virtual void PrintSummary()
         {
-            Balance += amount;
+            Console.WriteLine($"Konto för: {AccountHolder}, Saldo: {GetBalance()} kr");
+        }
+    }
+
+    public class BankAccount : Account
+    {
+        private decimal balance;
+
+        public override void Deposit(decimal amount)
+        {
+            if (amount > 0)
+                balance += amount;
         }
 
-        public void Withdraw(decimal amount)
+        public override void Withdraw(decimal amount)
         {
-            Balance -= amount;
+            if (amount > 0 && amount <= balance)
+                balance -= amount;
         }
 
-        public void PrintBalance()
+        public override decimal GetBalance()
         {
-            Console.WriteLine($"Account Holder: {AccountHolder}, Balance: {Balance} kr");
+            return balance;
+        }
+
+        public override void PrintSummary()
+        {
+            Console.WriteLine($"[Privatkonto] {AccountHolder} - Saldo: {balance} kr");
         }
     }
 }
