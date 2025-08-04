@@ -20,4 +20,14 @@
             Console.WriteLine($"Account Holder: {AccountHolder}, Balance: {Balance} kr");
         }
     }
+
+    public class SavingsAccount : BankAccount
+    {
+        public decimal InterestRate { get; set; }
+
+        public void ApplyInterest()
+        {
+            Balance += Balance * InterestRate;
+        }
+    }
 }
