@@ -15,9 +15,19 @@
             Balance -= amount;
         }
 
-        public void PrintBalance()
+        public virtual void PrintBalance()
         {
             Console.WriteLine($"Account Holder: {AccountHolder}, Balance: {Balance} kr");
+        }
+    }
+
+    public class BusinessAccount : BankAccount
+    {
+        public string CompanyName { get; set; }
+
+        public override void PrintBalance()
+        {
+            Console.WriteLine($"Business: {CompanyName} (Holder: {AccountHolder}), Balance: {Balance} kr");
         }
     }
 }
