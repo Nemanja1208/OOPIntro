@@ -1,0 +1,22 @@
+name: .NET Build PR Check
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Bygg .NET Console App
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Klona repot
+      uses: actions/checkout@v3
+
+    - name: Installera .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x' # eller ändra till 7.0.x om det är din version
+
+    - name: Bygg projektet
+      run: dotnet build --configuration Release
