@@ -8,9 +8,45 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-    - name: Send PR event to Discord
-      run: |
-        curl -H "Content-Type: application/json" \
-        -X POST \
-        -d '{"content":"📣 Ny PR skapades av ${{ github.actor }} i repo `${{ github.repository }}`!"}' \
-        ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Success message
+        if: ${{ success() }}
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{
+            "username": "PR Bot",
+            "avatar_url": "https://www.ditverzinjeniet.nl/wp-content/uploads/2019/01/products-borat-mankini-sfeer.jpg",
+            "content": "✅ Build succeeded !",
+            "embeds": [
+              {
+                "title": "Great success! 🎉",
+                "image": {
+                  "url": "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmpwYWJrb242bTczYjB6MnJqeWVhamJ6bXJleW56OHdjOGx2aTh1bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Od0QRnzwRBYmDU3eEO/giphy.gif"
+                },
+                "color": 3066993
+              }
+            ]
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Failure message
+        if: ${{ failure() }}
+        run: |
+          curl -H "Content-Type: application/json" \
+          -X POST \
+          -d '{
+            "username": "PR Bot",
+            "avatar_url": "https://www.ditverzinjeniet.nl/wp-content/uploads/2019/01/products-borat-mankini-sfeer.jpg",
+            "content": "❌ Build failed!",
+            "embeds": [
+              {
+                "title": "NOT great success... 💀",
+                "image": {
+                  "url": "https://media.giphy.com/media/1BXa2alBjrCXC/giphy.gif"
+                },
+                "color": 15158332
+              }
+            ]
+          }' \
+          ${{ secrets.DISCORD_WEBHOOK }}
+
