@@ -5,8 +5,8 @@ on:
     inputs:
       env:
         type: choice
-        options: [dev, prod]
-        default: dev
+        options: [DEVELOPMENT, PRODUCTION]
+        default: DEVELOPMENT
       message:
         type: string
         required: false
@@ -25,7 +25,7 @@ jobs:
           MSG="${{ github.event.inputs.message }}"
 
           # colors: greenish for dev, red for prod
-          if [ "$ENV" = "prod" ]; then COLOR=16711680; ICON="🔥"; else COLOR=3447003; ICON="🧪"; fi
+          if [ "$ENV" = "PRODUCTION" ]; then COLOR=16711680; ICON="🔥"; else COLOR=3447003; ICON="🧪"; fi
 
           # silly avatar and borat gif (this is embeddable on discord)
           AVATAR="https://avatars.githubusercontent.com/u/583231?v=4"
