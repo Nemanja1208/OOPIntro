@@ -2,7 +2,7 @@ name: .NET Build PR Check
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ development ]
 
 jobs:
   build:
